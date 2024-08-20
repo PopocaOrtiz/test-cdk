@@ -8,6 +8,7 @@ import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { LambdaRestApi } from 'aws-cdk-lib/aws-apigateway';
 import {HitCounter} from "./hitcounter";
 import { TableViewer } from 'cdk-dynamo-table-viewer'
+import {Buckets} from "./buckets";
 
 export class CdkWorkshopStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -32,5 +33,7 @@ export class CdkWorkshopStack extends Stack {
       table: helloWithCounter.table,
       sortBy: '-hits',
     })
+
+    const buckets = new Buckets(this, 'HitCounterBuckets')
   }
 }
